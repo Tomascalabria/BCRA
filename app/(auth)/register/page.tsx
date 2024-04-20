@@ -14,7 +14,7 @@ export default function RegistrationForm() {
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
-
+  const router =useRouter
   const supabase = createClientComponentClient();
 
   const handleSignUp = async (e: React.FormEvent) => {
@@ -28,13 +28,14 @@ export default function RegistrationForm() {
         options: {
           emailRedirectTo: `${window.location.origin}/auth/callback`, // corrected redirectTo
         },
+        
       });
       if (error) {
         throw error;
       }
+      router().refresh()
       setIsLoading(false);
       // Redirect or perform any other action upon successful sign-up
-        useRouter().refresh()
     } catch (error) {
       console.error("Error signing up:", error);
       setIsLoading(false);
