@@ -1,4 +1,5 @@
 "use client"
+
 import * as React from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
@@ -17,6 +18,8 @@ export default function RegistrationForm() {
   const router =useRouter()
   const supabase = createClientComponentClient();
 
+
+  
   const handleSignUp = async (e: React.FormEvent) => {
     e.preventDefault(); // Prevent default form submission behavior
     setIsLoading(true);
@@ -102,4 +105,7 @@ export default function RegistrationForm() {
       </div>
     </div>
   );
+}
+export async function getStaticProps() {
+  return { props: {} };
 }

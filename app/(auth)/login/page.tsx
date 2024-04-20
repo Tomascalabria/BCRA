@@ -17,14 +17,10 @@ import { createClientComponentClient } from "@supabase/auth-helpers-nextjs"
 import { useState } from "react"
 import {  useRouter } from "next/navigation"
 
-interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {}
-export const description =
-"A login form with email and password. There's an option to login with Google and a link to sign up if you don't have an account."
+export async function getStaticProps() {
+  return { props: {} };
+}
 
-export const iframeHeight = "600px"
-
-export const containerClassName =
-"w-full h-screen flex items-center justify-center px-4"
 
 export default function LoginForm() {
   const [isLoading, setIsLoading] = React.useState<boolean>(false)
