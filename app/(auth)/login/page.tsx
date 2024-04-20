@@ -15,25 +15,23 @@ import { Label } from "@/components/ui/label"
 import { Icons } from "@/components/ui/icons"
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs"
 import { useState } from "react"
-import { redirect, useRouter } from "next/navigation"
+import {  useRouter } from "next/navigation"
 
 interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {}
-
 export const description =
-  "A login form with email and password. There's an option to login with Google and a link to sign up if you don't have an account."
+"A login form with email and password. There's an option to login with Google and a link to sign up if you don't have an account."
 
 export const iframeHeight = "600px"
 
 export const containerClassName =
-  "w-full h-screen flex items-center justify-center px-4"
+"w-full h-screen flex items-center justify-center px-4"
 
 export default function LoginForm() {
   const [isLoading, setIsLoading] = React.useState<boolean>(false)
-
+  
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const router = useRouter()
-
     const supabase = createClientComponentClient()
 
     const handleSignIn = async (e:any)=>{
@@ -43,9 +41,10 @@ export default function LoginForm() {
         email,
         password,
       })
-
+      
       setIsLoading(false)
-      redirect('/dashboard')
+      router.push('/dashboard')
+      
      
   
     }
