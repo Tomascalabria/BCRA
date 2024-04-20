@@ -20,7 +20,7 @@ import {
   Users2,
 } from "lucide-react"
 
-import { Badge,badgeVariants} from "@/components/ui/badge"
+import { Badge,BadgeVariant,badgeVariants} from "@/components/ui/badge"
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -354,8 +354,12 @@ export default function Dashboard() {
                     <strong>{project.name}</strong> <span className="styles_subtleSep__9EA3Q">—</span> {project.description}
                   </div></Link>
                 </TableCell>
-                    <TableCell className="hidden sm:table-cell">< Badge className={badgeVariants({ variant: project.status })}>{project.status}</Badge></TableCell>
-                    <TableCell>
+                <TableCell className="hidden sm:table-cell">
+                <Badge className={badgeVariants({ variant: project.status as BadgeVariant })}>
+                        {project.status}
+                      </Badge>
+                    </TableCell>                   
+                     <TableCell>
                       <DropdownMenu>
                         <DropdownMenuTrigger asChild>
                           <Button aria-haspopup="true" size="icon" variant="ghost">
