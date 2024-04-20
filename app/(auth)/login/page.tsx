@@ -17,9 +17,6 @@ import { createClientComponentClient } from "@supabase/auth-helpers-nextjs"
 import { useState } from "react"
 import {  useRouter } from "next/navigation"
 
-export async function getStaticProps() {
-  return { props: {} };
-}
 
 
 export default function LoginForm() {

@@ -106,6 +106,3 @@ export default function RegistrationForm() {
     </div>
   );
 }
-export async function getStaticProps() {
-  return { props: {} };
-}
