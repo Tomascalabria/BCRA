@@ -254,7 +254,10 @@ export default function Dashboard() {
                 href="#"
                 className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
               >
-                  <ProfileAvatar/>
+                <Button size="icon" style={{border:'transparent',background:'transparent'}}>
+                    <ProfileAvatar />
+                    <span className="sr-only">Profile</span>
+                  </Button>
                 </Link>
             </TooltipTrigger>
             <TooltipContent side="right">Profile</TooltipContent>
