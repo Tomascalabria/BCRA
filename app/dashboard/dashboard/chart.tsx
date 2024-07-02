@@ -22,14 +22,11 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 
-interface VariableHistoryChartProps {
+interface Variable {
   idVariable: number;
   descripcion: string;
-}
-
-interface DataPoint {
-  fecha: string;
   valor: number;
+  fecha: string;
 }
 
 const FormSchema = z.object({
@@ -41,27 +38,26 @@ const FormSchema = z.object({
   }),
 });
 
-const VariableHistoryChart: React.FC<VariableHistoryChartProps> = ({ idVariable, descripcion }) => {
-  const [data, setData] = useState<DataPoint[]>([]);
+const VariableHistoryChart: React.FC<{ idVariable: number; descripcion: string; }> = ({ idVariable, descripcion }) => {
+  const [data, setData] = useState<Variable[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
   });
+
   const fetchData = (startDate: string, endDate: string) => {
     setLoading(true);
-    console.log(`Fetching data from ${startDate} to ${endDate}`); // Log the dates
+    console.log(`Fetching data from ${startDate} to ${endDate}`);
     fetchVariableHistory(idVariable, startDate, endDate)
       .then((response) => {
-        console.log('API response:', response); // Log the response
-        if (response && response.results) {
-          const formattedData = response.results.map((item: any) => ({
-            fecha: item.fecha,
-            valor: item.valor,
-          }));
-          setData(formattedData);
-        } else {
-          setData([]); // Or handle appropriately if no results
-        }
+        console.log('API response:', response);
+        const formattedData: Variable[] = response.map((item: any) => ({
+          idVariable: item.idVariable,
+          descripcion: item.descripcion,
+          valor: item.valor,
+          fecha: item.fecha,
+        }));
+        setData(formattedData);
         setLoading(false);
       })
       .catch((error) => {
@@ -69,10 +65,10 @@ const VariableHistoryChart: React.FC<VariableHistoryChartProps> = ({ idVariable,
         setLoading(false);
       });
   };
-  
+
   useEffect(() => {
     const today = new Date();
-    const oneYearAgo = subYears(today, 1); // Fecha de hace un año
+    const oneYearAgo = subYears(today, 1);
     fetchData(oneYearAgo.toISOString().split('T')[0], today.toISOString().split('T')[0]);
   }, [idVariable]);
 
@@ -169,17 +165,14 @@ const VariableHistoryChart: React.FC<VariableHistoryChartProps> = ({ idVariable,
                   <FormMessage />
                 </FormItem>
               )}
-              
             />
-
-                          <Button type="submit" >Obtener Datos</Button>
+            <Button type="submit" style={{marginTop:'30px'}}>Obtener Datos</Button>
           </div>
         </form>
-        
       </Form>
       <ResponsiveContainer width="100%" height={400}>
         <LineChart data={data}>
-          <CartesianGrid strokeDasharray="3 3" />
+          <CartesianGrid strokeDasharray="4 4" />
           <XAxis dataKey="fecha" tick={{ fill: '#ffffff' }} />
           <YAxis />
           <Tooltip />
