@@ -100,30 +100,25 @@ const DashboardPage = () => {
       <section>
         <h2 className="text-lg font-semibold">Depósitos y Préstamos</h2>
         <div className="grid gap-4 md:grid-cols-2 md:gap-8 lg:grid-cols-4">
-          {renderCards(data.filter(item => [16, 17, 18, 19, 20, 21, 22, 23, 24].includes(item.idVariable)))}
+          {renderCards(data.filter(item => [16, 17, 18, 19, 20, 21, 22, 23, 24,26].includes(item.idVariable)))}
         </div>
       </section>
 
       <section>
         <h2 className="text-lg font-semibold">Inflación</h2>
         <div className="grid gap-4 md:grid-cols-2 md:gap-8 lg:grid-cols-4">
-          {renderCards(data.filter(item => [25, 26].includes(item.idVariable)))}
+          {renderCards(data.filter(item => [27, 28 ].includes(item.idVariable)))}
         </div>
       </section>
 
       <section>
         <h2 className="text-lg font-semibold">Índices y Unidades</h2>
         <div className="grid gap-4 md:grid-cols-2 md:gap-8 lg:grid-cols-4">
-          {renderCards(data.filter(item => [27, 28].includes(item.idVariable)))}
+          {renderCards(data.filter(item => [25].includes(item.idVariable)))}
         </div>
       </section>
 
-      <section>
-        <h2 className="text-lg font-semibold">Otras Variables</h2>
-        <div className="grid gap-4 md:grid-cols-2 md:gap-8 lg:grid-cols-4">
-          {renderCards(data.filter(item => [27, 28].includes(item.idVariable)))}
-        </div>
-      </section>
+
 
       {selectedVariable && (
         <section ref={chartRef}>
