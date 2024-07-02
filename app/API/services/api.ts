@@ -25,16 +25,19 @@ interface Variable {
     }
   };
   
+// api.ts (or wherever your API functions are defined)
 
-  export const fetchVariableHistory = async (idVariable: number) => {
-    const today = new Date().toISOString().split('T')[0]; // Formato de fecha 'YYYY-MM-DD'
-    const response = await fetch(
-      `https://api.bcra.gob.ar/estadisticas/v2.0/datosvariable/${idVariable}/2024-01-01/${today}`
-    );
-    const data = await response.json();
-    return data.results.map((item: any) => ({
-      fecha: item.fecha,
-      valor: item.valor,
-    }));
+export const fetchVariableHistory = async (idVariable: number, startDate: string, endDate: string): Promise<[]> => {
+    try {
+      const response = await fetch(`https://api.bcra.gob.ar/estadisticas/v2.0/datosvariable/${idVariable}/${startDate}/${endDate}`);
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.error('Error fetching variable history:', error);
+      throw error;
+    }
   };
   

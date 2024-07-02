@@ -1,11 +1,9 @@
-// DashboardPage.tsx
-
-'use client'
+'use client';
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Users } from "lucide-react";
 import { useEffect, useState, useRef } from "react";
 import { fetchDailyVariables } from "../../API/services/api"; // Importa la función desde tu archivo api.ts
-import VariableHistoryChart from './chart'
+import VariableHistoryChart from './chart';
 
 interface Variable {
   idVariable: number;
@@ -51,7 +49,7 @@ const DashboardPage = () => {
 
   const renderCards = (categoryData: Variable[]) =>
     categoryData.map((item) => (
-      <Card key={item.idVariable} x-chunk={`dashboard-01-chunk-${item.idVariable}`} onClick={() => setSelectedVariable(item)}>
+      <Card key={item.idVariable} onClick={() => setSelectedVariable(item)}>
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
           <CardTitle className="text-sm font-medium">{item.descripcion}</CardTitle>
           <Users className="h-4 w-4 text-muted-foreground" />
