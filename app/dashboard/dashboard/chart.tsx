@@ -47,18 +47,21 @@ const VariableHistoryChart: React.FC<VariableHistoryChartProps> = ({ idVariable,
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
   });
-
   const fetchData = (startDate: string, endDate: string) => {
     setLoading(true);
     console.log(`Fetching data from ${startDate} to ${endDate}`); // Log the dates
     fetchVariableHistory(idVariable, startDate, endDate)
-      .then((data) => {
-        console.log('API response:', data); // Log the response
-        const formattedData = data.results.map((item: any) => ({
-          fecha: item.fecha,
-          valor: item.valor,
-        }));
-        setData(formattedData);
+      .then((response) => {
+        console.log('API response:', response); // Log the response
+        if (response && response.results) {
+          const formattedData = response.results.map((item: any) => ({
+            fecha: item.fecha,
+            valor: item.valor,
+          }));
+          setData(formattedData);
+        } else {
+          setData([]); // Or handle appropriately if no results
+        }
         setLoading(false);
       })
       .catch((error) => {
@@ -66,7 +69,7 @@ const VariableHistoryChart: React.FC<VariableHistoryChartProps> = ({ idVariable,
         setLoading(false);
       });
   };
-
+  
   useEffect(() => {
     const today = new Date();
     const oneYearAgo = subYears(today, 1); // Fecha de hace un año
@@ -166,10 +169,13 @@ const VariableHistoryChart: React.FC<VariableHistoryChartProps> = ({ idVariable,
                   <FormMessage />
                 </FormItem>
               )}
+              
             />
-              <Button type="submit">Obtener Datos</Button>
+
+                          <Button type="submit" >Obtener Datos</Button>
           </div>
         </form>
+        
       </Form>
       <ResponsiveContainer width="100%" height={400}>
         <LineChart data={data}>
