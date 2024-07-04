@@ -93,7 +93,7 @@ const DashboardPage = () => {
       <section>
         <h2 className="text-lg font-semibold">Base Monetaria y Circulación</h2>
         <div className="grid gap-4 md:grid-cols-2 md:gap-8 lg:grid-cols-4">
-          {renderCards(data.filter(item => [15].includes(item.idVariable)))}
+          {renderCards(data.filter(item => [15,25].includes(item.idVariable)))}
         </div>
       </section>
 
@@ -110,14 +110,6 @@ const DashboardPage = () => {
           {renderCards(data.filter(item => [27, 28 ].includes(item.idVariable)))}
         </div>
       </section>
-
-      <section>
-        <h2 className="text-lg font-semibold">Índices y Unidades</h2>
-        <div className="grid gap-4 md:grid-cols-2 md:gap-8 lg:grid-cols-4">
-          {renderCards(data.filter(item => [25].includes(item.idVariable)))}
-        </div>
-      </section>
-
 
 
       {selectedVariable && (

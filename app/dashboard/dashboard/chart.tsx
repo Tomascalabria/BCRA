@@ -103,7 +103,7 @@ const VariableHistoryChart: React.FC<{ idVariable: number; descripcion: string; 
                           {field.value ? (
                             format(field.value, "PPP")
                           ) : (
-                            <span>Seleccionar fecha</span>
+                            <span>Fecha Inicio</span>
                           )}
                         </Button>
                       </FormControl>
@@ -121,7 +121,7 @@ const VariableHistoryChart: React.FC<{ idVariable: number; descripcion: string; 
                     </PopoverContent>
                   </Popover>
                   <FormDescription style={{ textAlign: 'center' }}>
-                    Elija la fecha de inicio.
+                    *La api unicamente informa como maximo periodos de: 
                   </FormDescription>
                   <FormMessage />
                 </FormItem>
@@ -142,7 +142,7 @@ const VariableHistoryChart: React.FC<{ idVariable: number; descripcion: string; 
                           {field.value ? (
                             format(field.value, "PPP")
                           ) : (
-                            <span>Seleccionar fecha</span>
+                            <span>Fecha Fin</span>
                           )}
                         </Button>
                       </FormControl>
@@ -160,7 +160,7 @@ const VariableHistoryChart: React.FC<{ idVariable: number; descripcion: string; 
                     </PopoverContent>
                   </Popover>
                   <FormDescription style={{ textAlign: 'center' }}>
-                    Elija la fecha de fin.
+                    1 año entre plazos.
                   </FormDescription>
                   <FormMessage />
                 </FormItem>
@@ -173,10 +173,10 @@ const VariableHistoryChart: React.FC<{ idVariable: number; descripcion: string; 
       <ResponsiveContainer width="100%" height={400}>
         <LineChart data={data}>
           <CartesianGrid strokeDasharray="4 4" />
-          <XAxis dataKey="fecha" tick={{ fill: '#ffffff' }} />
+          <XAxis dataKey="fecha" tick={{ fill: 'variant' }}  />
           <YAxis />
-          <Tooltip />
-          <Line type="monotone" dataKey="valor" stroke="#8884d8" activeDot={{ r: 8 }} />
+          <Tooltip  />
+          <Line type='bumpX' dataKey="valor" stroke="#8884d8" activeDot={{ r: 8 }} />
         </LineChart>
       </ResponsiveContainer>
     </div>
