@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { LineChart, Line, XAxis, YAxis, Tooltip, CartesianGrid, ResponsiveContainer } from 'recharts';
+import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import { zodResolver } from "@hookform/resolvers/zod";
 import { format, subYears } from "date-fns";
 import { useForm } from "react-hook-form";
@@ -79,12 +79,12 @@ const VariableHistoryChart: React.FC<{ idVariable: number; descripcion: string; 
   };
 
   if (loading) {
-    return <div>Cargando...</div>;
+    return <div className="text-white">Cargando...</div>;
   }
 
   return (
     <div>
-      <h2 className="text-lg font-semibold">{descripcion}</h2>
+      <h2 className="text-lg font-semibold text-white">{descripcion}</h2>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
           <div className="flex flex-wrap items-end space-x-4">
@@ -98,7 +98,7 @@ const VariableHistoryChart: React.FC<{ idVariable: number; descripcion: string; 
                       <FormControl>
                         <Button
                           variant={"outline"}
-                          className="w-[240px] pl-3 text-left font-normal"
+                          className="w-[240px] pl-3 text-left font-normal text-white bg-black border-white"
                         >
                           {field.value ? (
                             format(field.value, "PPP")
@@ -108,7 +108,7 @@ const VariableHistoryChart: React.FC<{ idVariable: number; descripcion: string; 
                         </Button>
                       </FormControl>
                     </PopoverTrigger>
-                    <PopoverContent className="w-auto p-0" align="start">
+                    <PopoverContent className="w-auto p-0 bg-black border-white" align="start">
                       <Calendar
                         mode="single"
                         selected={field.value}
@@ -120,7 +120,7 @@ const VariableHistoryChart: React.FC<{ idVariable: number; descripcion: string; 
                       />
                     </PopoverContent>
                   </Popover>
-                  <FormDescription style={{ textAlign: 'center' }}>
+                  <FormDescription className="text-center text-white">
                     *La api unicamente informa como maximo periodos de: 
                   </FormDescription>
                   <FormMessage />
@@ -137,7 +137,7 @@ const VariableHistoryChart: React.FC<{ idVariable: number; descripcion: string; 
                       <FormControl>
                         <Button
                           variant={"outline"}
-                          className="w-[240px] pl-3 text-left font-normal"
+                          className="w-[240px] pl-3 text-left font-normal text-white bg-black border-white"
                         >
                           {field.value ? (
                             format(field.value, "PPP")
@@ -147,7 +147,7 @@ const VariableHistoryChart: React.FC<{ idVariable: number; descripcion: string; 
                         </Button>
                       </FormControl>
                     </PopoverTrigger>
-                    <PopoverContent className="w-auto p-0" align="start">
+                    <PopoverContent className="w-auto p-0 bg-black border-white" align="start">
                       <Calendar
                         mode="single"
                         selected={field.value}
@@ -159,25 +159,31 @@ const VariableHistoryChart: React.FC<{ idVariable: number; descripcion: string; 
                       />
                     </PopoverContent>
                   </Popover>
-                  <FormDescription style={{ textAlign: 'center' }}>
+                  <FormDescription className="text-center text-white">
                     1 año entre plazos.
                   </FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
             />
-            <Button type="submit" style={{marginTop:'30px'}}>Obtener Datos</Button>
+            <Button type="submit" style={{marginTop:'30px', backgroundColor: 'black', color: 'white', borderColor: 'white'}}>Obtener Datos</Button>
           </div>
         </form>
       </Form>
       <ResponsiveContainer width="100%" height={400}>
-        <LineChart data={data}>
-          <CartesianGrid strokeDasharray="4 4" />
-          <XAxis dataKey="fecha" tick={{ fill: 'variant' }}  />
-          <YAxis />
-          <Tooltip  />
-          <Line type='bumpX' dataKey="valor" stroke="#8884d8" activeDot={{ r: 8 }} />
-        </LineChart>
+        <AreaChart data={data}>
+          <defs>
+            <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="5%" stopColor="#0000FF" stopOpacity={0.8}/>
+              <stop offset="95%" stopColor="#0000FF" stopOpacity={0}/>
+            </linearGradient>
+          </defs>
+          <CartesianGrid strokeDasharray="3 3" stroke="#333" />
+          <XAxis dataKey="fecha" tick={{ fill: '#FFF' }} />
+          <YAxis tick={{ fill: '#FFF' }} />
+          <Tooltip contentStyle={{ backgroundColor: '#333', borderColor: '#777', color: '#FFF' }} />
+          <Area type="monotone" dataKey="valor" stroke="#0377fc" fill="url(#colorUv)" />
+        </AreaChart>
       </ResponsiveContainer>
     </div>
   );

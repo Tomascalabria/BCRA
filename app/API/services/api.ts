@@ -123,11 +123,8 @@ export async function fetchPanelAccionesLideres(): Promise<AccionLider[]> {
       tradeVolume: item.tradeVolume,
       symbol: item.symbol,
       imbalance: item.imbalance,
-      previousSettlementPrice: `$ ${item.previousSettlementPrice.toFixed(1).toLocaleString()}`
-      ,
-      offerPrice: item.offerPrice.toLocaleString('en-US', {
-        style: 'currency',
-        currency: 'USD'}),
+      previousSettlementPrice: item.previousSettlementPrice,
+      offerPrice: item.offerPrice,
       vwap: item.vwap,
       numberOfOrders: item.numberOfOrders,
       openingPrice: item.openingPrice,
@@ -146,10 +143,8 @@ export async function fetchPanelAccionesLideres(): Promise<AccionLider[]> {
       trade: item.trade, // Asigna los valores de las nuevas columnas
       tradeHour: item.tradeHour,
       securityType: item.securityType,
-      closingPrice: item.closingPrice.toLocaleString('en-US', {
-        style: 'currency',
-        currency: 'USD'}),
-      settlementPrice:  `$ ${item.settlementPrice.toFixed(1).toLocaleString()}`,
+      closingPrice: item.closingPrice,
+      settlementPrice: item.settlementPrice,
       quantityBid: item.quantityBid,
   }));
 

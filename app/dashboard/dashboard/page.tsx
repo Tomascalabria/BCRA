@@ -113,7 +113,7 @@ const DashboardPage = () => {
 
 
       {selectedVariable && (
-        <section ref={chartRef}>
+        <section ref={chartRef} >
           <VariableHistoryChart idVariable={selectedVariable.idVariable} descripcion={selectedVariable.descripcion} />
         </section>
       )}
