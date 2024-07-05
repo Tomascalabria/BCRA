@@ -24,14 +24,12 @@ const AccionesLideresTable: React.FC<{ data: AccionLider[] }> = ({ data }) => {
                     </thead>
                     <tbody>
                         {limitedData.map((accion) => {
-                            const previousClosingPrice = parseFloat(accion.previousClosingPrice);
-                            const offerPrice = parseFloat(accion.offerPrice);
-                            const ratio = `${(previousClosingPrice / accion.trade).toFixed(2)}%`;
+                            const ratio = `${(accion.previousClosingPrice / accion.trade).toFixed(2)}%`;
                             if(accion.previousClosingPrice !=0){
                             return (
                                 <tr key={accion.index} className="border-t">
                                     <td className="p-2 font-medium">{accion.symbol}</td>
-                                    <td className="p-2">{previousClosingPrice}</td>
+                                    <td className="p-2">{accion.previousClosingPrice}</td>
                                     <td className="p-2">{accion.trade}</td>
                                     <td className="p-2">{ratio}</td>
                                 </tr>

@@ -63,7 +63,7 @@ export interface AccionLider {
   openingPrice: number;
   securityDesc: string;
   securitySubType: string;
-  previousClosingPrice: string;
+  previousClosingPrice: number;
   settlementType: number;
   quantityOffer: number;
   tradingHighPrice: number;
